@@ -29,6 +29,7 @@
 		B65DF1A0291FC21D00CBA00C /* WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19E291FC21D00CBA00C /* WordListManager.swift */; };
 		B65DF1A2291FC24F00CBA00C /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A1291FC24F00CBA00C /* GameError.swift */; };
 		B65DF1A3291FC24F00CBA00C /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A1291FC24F00CBA00C /* GameError.swift */; };
+		B65DF1A5291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A4291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		B65DF19B291FB42F00CBA00C /* RandomWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWordModel.swift; sourceTree = "<group>"; };
 		B65DF19E291FC21D00CBA00C /* WordListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListManager.swift; sourceTree = "<group>"; };
 		B65DF1A1291FC24F00CBA00C /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
+		B65DF1A4291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordGameTests+RandomWordManager.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				B636CBFF291EFC20004578A6 /* WordGameTests.swift */,
+				B65DF1A4291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift */,
 			);
 			path = WordGameTests;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				B636CC00291EFC20004578A6 /* WordGameTests.swift in Sources */,
 				B65DF1A3291FC24F00CBA00C /* GameError.swift in Sources */,
 				B65DF194291FAEE800CBA00C /* WordModel.swift in Sources */,
+				B65DF1A5291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift in Sources */,
 				B65DF19D291FB42F00CBA00C /* RandomWordModel.swift in Sources */,
 				B65DF197291FAF4100CBA00C /* WordService.swift in Sources */,
 				B65DF1A0291FC21D00CBA00C /* WordListManager.swift in Sources */,

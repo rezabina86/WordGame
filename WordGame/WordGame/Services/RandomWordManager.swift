@@ -23,14 +23,14 @@ struct RandomWordManager {
         availableWordIndexs = Array(words.startIndex..<words.endIndex)
     }
     
-    private mutating func generateCorrectQuestion() -> WordModel {
+    private mutating func generateCorrectQuestion() -> WordModel? {
         
         if availableWordIndexs.isEmpty {
             reset()
         }
         
         // The words list can not be empty. If it's empty, we throw an error when we try to call load() func.
-        let randomIndex = availableWordIndexs.randomElement() ?? 0
+        guard let randomIndex = availableWordIndexs.randomElement() else { return  nil }
         
         // Remove the randomIndex from availableWordIndexs.
         // It avoids picking the same word more than once.
@@ -41,7 +41,7 @@ struct RandomWordManager {
         return words[randomIndex]
     }
     
-    private func generateWrongQuestion() -> WordModel {
+    private func generateWrongQuestion() -> WordModel? {
         
 #if DEBUG
         assert(words.count > 1, "We should have at least two words to generate a wrong question.")
@@ -73,12 +73,12 @@ struct RandomWordManager {
     
     // MARK: - Publics
     
-    public mutating func generateWord() -> RandomWordModel {
+    public mutating func generateWord() -> RandomWordModel? {
         if shouldGenerateCorrectAnswer {
-            let correctWord = generateCorrectQuestion()
+            guard let correctWord = generateCorrectQuestion() else { return nil }
             return RandomWordModel(word: correctWord, isCorrect: true)
         } else {
-            let wrongWord = generateWrongQuestion()
+            guard let wrongWord = generateWrongQuestion() else { return nil }
             return RandomWordModel(word: wrongWord, isCorrect: false)
         }
     }
