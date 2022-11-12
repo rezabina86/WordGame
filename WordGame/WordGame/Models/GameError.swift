@@ -16,11 +16,11 @@ enum GameError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .errorParsingList:
-            return NSLocalizedString("errorParsingList", comment: "Error parsing the words list.")
+            return NSLocalizedString("error.errorParsingList", comment: "Error parsing the words list.")
         case .noResource:
-            return NSLocalizedString("noResource", comment: "Could not find the resource.")
+            return NSLocalizedString("error.noResource", comment: "Could not find the resource.")
         case .notEnoughWords:
-            return NSLocalizedString("notEnoughWords", comment: "Not enough words. The list should have at least two words.")
+            return NSLocalizedString("error.notEnoughWords", comment: "Not enough words. The list should have at least two words.")
         }
     }
     
