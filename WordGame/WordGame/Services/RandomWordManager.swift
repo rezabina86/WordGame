@@ -1,5 +1,5 @@
 //
-//  RandomWordService.swift
+//  RandomWordManager.swift
 //  WordGame
 //
 //  Created by Reza Bina on 11/12/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RandomWordService {
+struct RandomWordManager {
     
     // MARK: - Privates
     private let service: WordService

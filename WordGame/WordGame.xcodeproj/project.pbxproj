@@ -21,8 +21,8 @@
 		B65DF194291FAEE800CBA00C /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF192291FAEE800CBA00C /* WordModel.swift */; };
 		B65DF196291FAF4100CBA00C /* WordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF195291FAF4100CBA00C /* WordService.swift */; };
 		B65DF197291FAF4100CBA00C /* WordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF195291FAF4100CBA00C /* WordService.swift */; };
-		B65DF199291FAF9900CBA00C /* RandomWordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RandomWordService.swift */; };
-		B65DF19A291FAF9900CBA00C /* RandomWordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RandomWordService.swift */; };
+		B65DF199291FAF9900CBA00C /* RandomWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RandomWordManager.swift */; };
+		B65DF19A291FAF9900CBA00C /* RandomWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RandomWordManager.swift */; };
 		B65DF19C291FB42F00CBA00C /* RandomWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19B291FB42F00CBA00C /* RandomWordModel.swift */; };
 		B65DF19D291FB42F00CBA00C /* RandomWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19B291FB42F00CBA00C /* RandomWordModel.swift */; };
 		B65DF19F291FC21D00CBA00C /* WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19E291FC21D00CBA00C /* WordListManager.swift */; };
@@ -63,7 +63,7 @@
 		B65DF18C291FAC6A00CBA00C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B65DF192291FAEE800CBA00C /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		B65DF195291FAF4100CBA00C /* WordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordService.swift; sourceTree = "<group>"; };
-		B65DF198291FAF9900CBA00C /* RandomWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWordService.swift; sourceTree = "<group>"; };
+		B65DF198291FAF9900CBA00C /* RandomWordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWordManager.swift; sourceTree = "<group>"; };
 		B65DF19B291FB42F00CBA00C /* RandomWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWordModel.swift; sourceTree = "<group>"; };
 		B65DF19E291FC21D00CBA00C /* WordListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListManager.swift; sourceTree = "<group>"; };
 		B65DF1A1291FC24F00CBA00C /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				B65DF195291FAF4100CBA00C /* WordService.swift */,
-				B65DF198291FAF9900CBA00C /* RandomWordService.swift */,
+				B65DF198291FAF9900CBA00C /* RandomWordManager.swift */,
 				B65DF19E291FC21D00CBA00C /* WordListManager.swift */,
 			);
 			path = Services;
@@ -338,7 +338,7 @@
 				B636CBEF291EFC20004578A6 /* WordGameApp.swift in Sources */,
 				B65DF19C291FB42F00CBA00C /* RandomWordModel.swift in Sources */,
 				B65DF1A2291FC24F00CBA00C /* GameError.swift in Sources */,
-				B65DF199291FAF9900CBA00C /* RandomWordService.swift in Sources */,
+				B65DF199291FAF9900CBA00C /* RandomWordManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B65DF19A291FAF9900CBA00C /* RandomWordService.swift in Sources */,
+				B65DF19A291FAF9900CBA00C /* RandomWordManager.swift in Sources */,
 				B636CC00291EFC20004578A6 /* WordGameTests.swift in Sources */,
 				B65DF1A3291FC24F00CBA00C /* GameError.swift in Sources */,
 				B65DF194291FAEE800CBA00C /* WordModel.swift in Sources */,
