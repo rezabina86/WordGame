@@ -5,3 +5,9 @@
   Created by Reza Bina on 11/12/22.
   
 */
+
+// Errors
+"errorParsingList" = "Error parsing the words list.";
+"noResource" = "Could not find the resource to load the game.";
+"notEnoughWords" = "Not enough words. The list should have at least two words.";
+
