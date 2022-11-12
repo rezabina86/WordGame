@@ -13,8 +13,7 @@ class WordGameTests: XCTestCase {
     let wordListManager = WordListManager()
     let mockWordListManager = MockWordListManager()
     
-
-    struct MockWordListManager: WordService {
+    class MockWordListManager: WordService {
         func load() throws -> [WordModel] {
             return MockData.words
         }

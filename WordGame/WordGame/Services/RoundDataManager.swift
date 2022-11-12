@@ -9,6 +9,20 @@ import Foundation
 
 struct RoundDataManager {
     
+    // MARK: - Initializer
+    
+    init(service: WordService) throws {
+        self.service = service
+        
+        do {
+            words = try service.load()
+        } catch {
+            throw error
+        }
+        
+        reset()
+    }
+    
     // MARK: - Privates
     private let service: WordService
     private let words: [WordModel]
@@ -51,20 +65,6 @@ struct RoundDataManager {
         }
         
         return generateWrongQuestion()
-    }
-    
-    // MARK: - Initializer
-    
-    init(service: WordService) throws {
-        self.service = service
-        
-        do {
-            words = try service.load()
-        } catch {
-            throw error
-        }
-        
-        reset()
     }
     
     // MARK: - Publics

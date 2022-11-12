@@ -16,21 +16,16 @@
 		B65DF183291FAB9500CBA00C /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = B65DF181291FAB9500CBA00C /* words.json */; };
 		B65DF18A291FAC6A00CBA00C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B65DF18D291FAC6A00CBA00C /* Localizable.strings */; };
 		B65DF193291FAEE800CBA00C /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF192291FAEE800CBA00C /* WordModel.swift */; };
-		B65DF194291FAEE800CBA00C /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF192291FAEE800CBA00C /* WordModel.swift */; };
 		B65DF196291FAF4100CBA00C /* WordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF195291FAF4100CBA00C /* WordService.swift */; };
-		B65DF197291FAF4100CBA00C /* WordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF195291FAF4100CBA00C /* WordService.swift */; };
 		B65DF199291FAF9900CBA00C /* RoundDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RoundDataManager.swift */; };
-		B65DF19A291FAF9900CBA00C /* RoundDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF198291FAF9900CBA00C /* RoundDataManager.swift */; };
 		B65DF19C291FB42F00CBA00C /* GameRoundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19B291FB42F00CBA00C /* GameRoundData.swift */; };
-		B65DF19D291FB42F00CBA00C /* GameRoundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19B291FB42F00CBA00C /* GameRoundData.swift */; };
 		B65DF19F291FC21D00CBA00C /* WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19E291FC21D00CBA00C /* WordListManager.swift */; };
-		B65DF1A0291FC21D00CBA00C /* WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF19E291FC21D00CBA00C /* WordListManager.swift */; };
 		B65DF1A2291FC24F00CBA00C /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A1291FC24F00CBA00C /* GameError.swift */; };
-		B65DF1A3291FC24F00CBA00C /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A1291FC24F00CBA00C /* GameError.swift */; };
 		B65DF1A5291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A4291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift */; };
 		B65DF1A7291FE53900CBA00C /* WordGameTests+WordListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A6291FE53900CBA00C /* WordGameTests+WordListManager.swift */; };
 		B65DF1A92920061C00CBA00C /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1A82920061C00CBA00C /* MockData.swift */; };
 		B65DF1AB2920087500CBA00C /* WordGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1AA2920087500CBA00C /* WordGameViewModel.swift */; };
+		B65DF1AD292025D400CBA00C /* WordGameTests+WordGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DF1AC292025D400CBA00C /* WordGameTests+WordGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +58,7 @@
 		B65DF1A6291FE53900CBA00C /* WordGameTests+WordListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordGameTests+WordListManager.swift"; sourceTree = "<group>"; };
 		B65DF1A82920061C00CBA00C /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		B65DF1AA2920087500CBA00C /* WordGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordGameViewModel.swift; sourceTree = "<group>"; };
+		B65DF1AC292025D400CBA00C /* WordGameTests+WordGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordGameTests+WordGameViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,10 +121,11 @@
 		B636CBFE291EFC20004578A6 /* WordGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				B65DF1A82920061C00CBA00C /* MockData.swift */,
 				B636CBFF291EFC20004578A6 /* WordGameTests.swift */,
 				B65DF1A4291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift */,
 				B65DF1A6291FE53900CBA00C /* WordGameTests+WordListManager.swift */,
-				B65DF1A82920061C00CBA00C /* MockData.swift */,
+				B65DF1AC292025D400CBA00C /* WordGameTests+WordGameViewModel.swift */,
 			);
 			path = WordGameTests;
 			sourceTree = "<group>";
@@ -300,14 +297,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B65DF1A7291FE53900CBA00C /* WordGameTests+WordListManager.swift in Sources */,
-				B65DF19A291FAF9900CBA00C /* RoundDataManager.swift in Sources */,
+				B65DF1AD292025D400CBA00C /* WordGameTests+WordGameViewModel.swift in Sources */,
 				B636CC00291EFC20004578A6 /* WordGameTests.swift in Sources */,
-				B65DF1A3291FC24F00CBA00C /* GameError.swift in Sources */,
-				B65DF194291FAEE800CBA00C /* WordModel.swift in Sources */,
 				B65DF1A5291FDE0C00CBA00C /* WordGameTests+RandomWordManager.swift in Sources */,
-				B65DF19D291FB42F00CBA00C /* GameRoundData.swift in Sources */,
-				B65DF197291FAF4100CBA00C /* WordService.swift in Sources */,
-				B65DF1A0291FC21D00CBA00C /* WordListManager.swift in Sources */,
 				B65DF1A92920061C00CBA00C /* MockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

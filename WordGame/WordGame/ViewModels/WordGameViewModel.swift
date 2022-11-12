@@ -48,15 +48,7 @@ class WordGameViewModel: ObservableObject {
         self.userHasAnsweredCurrentRound = false
     }
     
-    // MARK: - Initializer
-    init() {
-        do {
-            self.gameRoundDataManager = try RoundDataManager(service: WordListManager())
-        } catch {
-            self.showError = true
-            self.errorMessage = error.localizedDescription
-        }
-        
+    private func privateInit() {
         // Game is over after three incorrect attempts
         $wrongAnswers
             .receive(on: RunLoop.main)
@@ -85,6 +77,30 @@ class WordGameViewModel: ObservableObject {
         
         
         self.startNewRound()
+    }
+    
+    // MARK: - Initializers
+    
+    init() {
+        do {
+            self.gameRoundDataManager = try RoundDataManager(service: WordListManager())
+        } catch {
+            self.showError = true
+            self.errorMessage = error.localizedDescription
+        }
+        self.privateInit()
+    }
+    
+    init(wordService: WordService) {
+        
+        do {
+            self.gameRoundDataManager = try RoundDataManager(service: wordService)
+        } catch {
+            self.showError = true
+            self.errorMessage = error.localizedDescription
+        }
+    
+        self.privateInit()
     }
     
     deinit {
