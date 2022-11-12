@@ -56,10 +56,18 @@ struct ContentView: View {
         VStack(alignment: .center) {
             Spacer()
             Text("Game Over")
+                .font(.headline)
+            
+            Spacer()
+                .frame(height: 24)
+            
             Text("Correct attempts: \(viewModel.rightAnswers)")
             Text("Wrong attempts: \(viewModel.wrongAnswers)")
             Text("No answers: \(viewModel.noAnswers)")
+            
             Spacer()
+                .frame(height: 24)
+            
             HStack {
                 Button("Play again") {
                     self.viewModel.restartGame()
@@ -72,6 +80,7 @@ struct ContentView: View {
                 }.buttonStyle(.borderedProminent)
                  .tint(.red)
             }
+            Spacer()
         }
         .padding()
     }

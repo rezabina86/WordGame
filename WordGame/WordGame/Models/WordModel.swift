@@ -19,6 +19,6 @@ struct WordModel : Codable {
 
 extension WordModel: Equatable {
     static func == (lhs: WordModel, rhs: WordModel) -> Bool {
-        return (lhs.english == rhs.english) && (lhs.spanish == rhs.spanish)
+        return (lhs.english.lowercased() == rhs.english.lowercased()) && (lhs.spanish.lowercased() == rhs.spanish.lowercased())
     }
 }

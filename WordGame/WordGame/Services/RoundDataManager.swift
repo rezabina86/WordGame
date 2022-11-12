@@ -11,44 +11,28 @@ struct RoundDataManager {
     
     // MARK: - Initializer
     
-    init(service: WordService) throws {
+    init(service: WordService, probabilityOfCorrectWord: Double) throws {
         self.service = service
+        self.probabilityOfCorrectWord = probabilityOfCorrectWord
         
         do {
             words = try service.load()
         } catch {
             throw error
         }
-        
-        reset()
     }
     
     // MARK: - Privates
     private let service: WordService
     private let words: [WordModel]
-    private var availableWordIndexs: [Int] = []
+    private let probabilityOfCorrectWord: Double
     
     private var shouldGenerateCorrectAnswer: Bool {
-        // The probability for a correct word pair to appear should be 25%
-        Int.random(in: 0..<4) == 0
+        Double.random(in: 0...1) < probabilityOfCorrectWord
     }
     
-    private mutating func generateCorrectQuestion() -> WordModel? {
-        
-        if availableWordIndexs.isEmpty {
-            reset()
-        }
-        
-        // The words list can not be empty. If it's empty, we throw an error when we try to call load() func.
-        guard let randomIndex = availableWordIndexs.randomElement() else { return  nil }
-        
-        // Remove the randomIndex from availableWordIndexs.
-        // It avoids picking the same word more than once.
-        if let removingIndex = availableWordIndexs.firstIndex(of: randomIndex) {
-            availableWordIndexs.remove(at: removingIndex)
-        }
-        
-        return words[randomIndex]
+    private func generateCorrectQuestion() -> WordModel? {
+        return words.randomElement()
     }
     
     private func generateWrongQuestion() -> WordModel? {
@@ -69,7 +53,7 @@ struct RoundDataManager {
     
     // MARK: - Publics
     
-    public mutating func generateWord() -> GameRoundData? {
+    public func generateWord() -> GameRoundData? {
         if shouldGenerateCorrectAnswer {
             guard let correctWord = generateCorrectQuestion() else { return nil }
             return GameRoundData(word: correctWord, isCorrect: true)
@@ -77,10 +61,6 @@ struct RoundDataManager {
             guard let wrongWord = generateWrongQuestion() else { return nil }
             return GameRoundData(word: wrongWord, isCorrect: false)
         }
-    }
-    
-    public mutating func reset() {
-        availableWordIndexs = Array(words.startIndex..<words.endIndex)
     }
     
 }

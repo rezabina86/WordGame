@@ -18,7 +18,7 @@ final class WordGameTests_RoundDataManager: WordGameTests {
     func testRoundDataManager() {
         
         do {
-            var RoundDataManager = try RoundDataManager(service: mockWordListManager)
+            let RoundDataManager = try RoundDataManager(service: mockWordListManager, probabilityOfCorrectWord: Constants.kProbabilityOfCorrectWord)
             let allWords = try mockWordListManager.load()
             
             for _ in 0..<(allWords.count * 10) {
@@ -42,6 +42,50 @@ final class WordGameTests_RoundDataManager: WordGameTests {
                     XCTAssertNotEqual(newWord.spanish, wordInWordList.spanish)
                 }
                 
+            }
+            
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    func testZeroProbability() {
+        
+        do {
+            let RoundDataManager = try RoundDataManager(service: mockWordListManager, probabilityOfCorrectWord: 0)
+            let allWords = try mockWordListManager.load()
+            
+            for _ in 0..<(allWords.count * 10) {
+                let newWord = RoundDataManager.generateWord()
+                
+                guard let newWord = newWord else {
+                    XCTFail("Could not generate a new word.")
+                    return
+                }
+                
+                XCTAssertTrue(newWord.isCorrect == false)
+            }
+            
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    func testOneProbability() {
+        
+        do {
+            let RoundDataManager = try RoundDataManager(service: mockWordListManager, probabilityOfCorrectWord: 1)
+            let allWords = try mockWordListManager.load()
+            
+            for _ in 0..<(allWords.count * 10) {
+                let newWord = RoundDataManager.generateWord()
+                
+                guard let newWord = newWord else {
+                    XCTFail("Could not generate a new word.")
+                    return
+                }
+                
+                XCTAssertTrue(newWord.isCorrect == true)
             }
             
         } catch {

@@ -10,11 +10,6 @@ import Combine
 
 class WordGameViewModel: ObservableObject {
     
-    // Mark: - Constants
-    private static let kNumberOfWordsInRound = 15
-    private static let kNumberOfWrongAttemps = 3
-    private static let kTimeOfEachRound = 5 // In seconds
-    
     // MARK: - Publishers
     
     // Game results
@@ -33,19 +28,19 @@ class WordGameViewModel: ObservableObject {
     @Published private(set) var errorMessage: String = ""
     
     // MARK: - Privates
-    private var userHasAnsweredCurrentRound = false
+    private var userHasAnsweredTheCurrentRound = false
     private var subscriptions: Set<AnyCancellable> = []
     private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     private var gameRoundDataManager: RoundDataManager?
     
     private func startNewRound() {
-        if !self.userHasAnsweredCurrentRound {
+        guard !isGameFinished else { return }
+        if !self.userHasAnsweredTheCurrentRound {
             self.noAnswers += 1
         }
-        guard !isGameFinished else { return }
-        self.remainingTimeInRound = WordGameViewModel.kTimeOfEachRound
+        self.remainingTimeInRound = Constants.kTimeOfEachRound
         self.currentRoundData = self.gameRoundDataManager?.generateWord()
-        self.userHasAnsweredCurrentRound = false
+        self.userHasAnsweredTheCurrentRound = false
     }
     
     private func privateInit() {
@@ -53,7 +48,7 @@ class WordGameViewModel: ObservableObject {
         $wrongAnswers
             .receive(on: RunLoop.main)
             .map { wAnswers in
-                return wAnswers > 2
+                return wAnswers >= Constants.kNumberOfWrongAttemps
             }
             .assign(to: &$isGameFinished)
         
@@ -61,7 +56,7 @@ class WordGameViewModel: ObservableObject {
         $numberOfRounds
             .receive(on: RunLoop.main)
             .map { numOfRounds in
-                return numOfRounds > WordGameViewModel.kNumberOfWordsInRound
+                return numOfRounds >= Constants.kNumberOfWordsInRound
             }
             .assign(to: &$isGameFinished)
         
@@ -83,7 +78,7 @@ class WordGameViewModel: ObservableObject {
     
     init() {
         do {
-            self.gameRoundDataManager = try RoundDataManager(service: WordListManager())
+            self.gameRoundDataManager = try RoundDataManager(service: WordListManager(), probabilityOfCorrectWord: Constants.kProbabilityOfCorrectWord)
         } catch {
             self.showError = true
             self.errorMessage = error.localizedDescription
@@ -94,7 +89,7 @@ class WordGameViewModel: ObservableObject {
     init(wordService: WordService) {
         
         do {
-            self.gameRoundDataManager = try RoundDataManager(service: wordService)
+            self.gameRoundDataManager = try RoundDataManager(service: wordService, probabilityOfCorrectWord: Constants.kProbabilityOfCorrectWord)
         } catch {
             self.showError = true
             self.errorMessage = error.localizedDescription
@@ -109,10 +104,10 @@ class WordGameViewModel: ObservableObject {
     
     // MARK: - Publics
     public func submitAnswer(isCorrect: Bool) {
-        self.userHasAnsweredCurrentRound = true
+        self.userHasAnsweredTheCurrentRound = true
         let isCurrentRoundCorrect = currentRoundData?.isCorrect ?? false
         
-        if (isCurrentRoundCorrect && isCorrect) || (!isCurrentRoundCorrect && !isCorrect) {
+        if isCurrentRoundCorrect == isCorrect {
             rightAnswers += 1
         } else  {
             wrongAnswers += 1
@@ -122,7 +117,6 @@ class WordGameViewModel: ObservableObject {
     }
     
     public func restartGame() {
-        self.gameRoundDataManager?.reset()
         self.rightAnswers = 0
         self.wrongAnswers = 0
         self.noAnswers = 0
