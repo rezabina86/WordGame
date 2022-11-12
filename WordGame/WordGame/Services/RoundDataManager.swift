@@ -19,10 +19,6 @@ struct RoundDataManager {
         Int.random(in: 0..<4) == 0
     }
     
-    private mutating func reset() {
-        availableWordIndexs = Array(words.startIndex..<words.endIndex)
-    }
-    
     private mutating func generateCorrectQuestion() -> WordModel? {
         
         if availableWordIndexs.isEmpty {
@@ -81,6 +77,10 @@ struct RoundDataManager {
             guard let wrongWord = generateWrongQuestion() else { return nil }
             return GameRoundData(word: wrongWord, isCorrect: false)
         }
+    }
+    
+    public mutating func reset() {
+        availableWordIndexs = Array(words.startIndex..<words.endIndex)
     }
     
 }
