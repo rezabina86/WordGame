@@ -9,9 +9,12 @@ import XCTest
 @testable import WordGame
 
 class WordGameTests: XCTestCase {
+    
+    let wordListManager = WordListManager()
+    let mockWordListManager = MockWordListManager()
+    
 
     struct MockWordListManager: WordService {
-        
         func load() throws -> [WordModel] {
             let word1 = WordModel(english: "equator", spanish: "ecuador")
             let word2 = WordModel(english: "humid", spanish: "húmedo")
@@ -21,7 +24,6 @@ class WordGameTests: XCTestCase {
             
             return [word1, word2, word3, word4, word5]
         }
-        
     }
 
 }

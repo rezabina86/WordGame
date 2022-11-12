@@ -9,13 +9,11 @@ import XCTest
 @testable import WordGame
 
 final class WordGameTests_RandomWordManager: WordGameTests {
-
-    let mockWordListManager = MockWordListManager()
     
     /*
      This test tries to init RandomWordManager with mock datas
      and calls generateWord() method to generate a new word. Then finds that
-     word in the word list and makes sure it generates correct questions.
+     word in the word list and makes sure questions are valid.
      */
     func testRandomWordManager() {
         
