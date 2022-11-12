@@ -1,5 +1,5 @@
 //
-//  RandomWordManager.swift
+//  RoundDataManager.swift
 //  WordGame
 //
 //  Created by Reza Bina on 11/12/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RandomWordManager {
+struct RoundDataManager {
     
     // MARK: - Privates
     private let service: WordService
@@ -73,13 +73,13 @@ struct RandomWordManager {
     
     // MARK: - Publics
     
-    public mutating func generateWord() -> RandomWordModel? {
+    public mutating func generateWord() -> GameRoundData? {
         if shouldGenerateCorrectAnswer {
             guard let correctWord = generateCorrectQuestion() else { return nil }
-            return RandomWordModel(word: correctWord, isCorrect: true)
+            return GameRoundData(word: correctWord, isCorrect: true)
         } else {
             guard let wrongWord = generateWrongQuestion() else { return nil }
-            return RandomWordModel(word: wrongWord, isCorrect: false)
+            return GameRoundData(word: wrongWord, isCorrect: false)
         }
     }
     

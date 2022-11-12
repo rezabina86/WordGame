@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RandomWordModel {
+struct GameRoundData {
     var english: String
     var spanish: String
     var isCorrect: Bool
