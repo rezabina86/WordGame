@@ -12,7 +12,9 @@ struct GameView: View {
     @StateObject private var viewModel = WordGameViewModel()
     
     var body: some View {
-        if viewModel.isGameFinished {
+        if viewModel.showError {
+            errorView()
+        } else if viewModel.isGameFinished {
             resultView()
         } else {
             gameView()
@@ -93,6 +95,11 @@ struct GameView: View {
             Spacer()
         }
         .padding()
+    }
+    
+    @ViewBuilder
+    func errorView() -> some View {
+        Text(viewModel.errorMessage)
     }
     
 }
