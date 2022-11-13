@@ -15,7 +15,9 @@ final class WordGameTests_WordGameViewModel: WordGameTests {
     
     func testCorrectAnswer() {
         
-        let viewModel = WordGameViewModel(wordService: mockWordListManager)
+        let viewModel = WordGameViewModel(wordService: mockWordListManager, config: mockGameConfiguration)
+        
+        viewModel.restartGame()
         
         let expectation = XCTestExpectation(description: "testCorrectAnswer")
         
@@ -44,7 +46,9 @@ final class WordGameTests_WordGameViewModel: WordGameTests {
     
     func testWrongAnswer() {
         
-        let viewModel = WordGameViewModel(wordService: mockWordListManager)
+        let viewModel = WordGameViewModel(wordService: mockWordListManager, config: mockGameConfiguration)
+        
+        viewModel.restartGame()
         
         let expectation = XCTestExpectation(description: "testWrongAnswer")
         
@@ -73,7 +77,9 @@ final class WordGameTests_WordGameViewModel: WordGameTests {
     
     func testFinishGameWithAllCorrectAnswers() {
         
-        let viewModel = WordGameViewModel(wordService: mockWordListManager)
+        let viewModel = WordGameViewModel(wordService: mockWordListManager, config: mockGameConfiguration)
+        
+        viewModel.restartGame()
         
         let expectation = XCTestExpectation(description: "testFinishGameWithAllCorrectAnswers")
         
@@ -96,13 +102,15 @@ final class WordGameTests_WordGameViewModel: WordGameTests {
         
         wait(for: [expectation], timeout: 2)
         
-        XCTAssertTrue(viewModel.rightAnswers == 15)
+        XCTAssertTrue(viewModel.rightAnswers == mockGameConfiguration.numberOfWordsInRound)
         XCTAssertTrue(viewModel.wrongAnswers == 0)
     }
     
     func testFinishGameWithAllWrongAnswers() {
         
-        let viewModel = WordGameViewModel(wordService: mockWordListManager)
+        let viewModel = WordGameViewModel(wordService: mockWordListManager, config: mockGameConfiguration)
+        
+        viewModel.restartGame()
         
         let expectation = XCTestExpectation(description: "testFinishGameWithAllWrongAnswers")
         
@@ -124,9 +132,9 @@ final class WordGameTests_WordGameViewModel: WordGameTests {
         .store(in: &subscriptions)
         
         wait(for: [expectation], timeout: 2)
-        
+    
         XCTAssertTrue(viewModel.rightAnswers == 0)
-        XCTAssertTrue(viewModel.wrongAnswers == 3)
+        XCTAssertTrue(viewModel.wrongAnswers == mockGameConfiguration.numberOfWrongAttemps)
     }
 
 }

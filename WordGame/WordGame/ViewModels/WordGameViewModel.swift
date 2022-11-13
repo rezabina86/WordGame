@@ -10,26 +10,16 @@ import Combine
 
 class WordGameViewModel: ObservableObject {
     
-    // MARK: - Publishers
-    
-    // Game results
-    @Published private(set) var rightAnswers: Int = 0
-    @Published private(set) var wrongAnswers: Int = 0
-    
-    @Published private(set) var currentRoundData: GameRoundData?
-    
-    @Published private(set) var isGameFinished: Bool = false
-    @Published private(set) var remainingTimeInRound: Int = Constants.kTimeOfEachRound
-    
-    // Error
-    @Published private(set) var showError: Bool = false
-    @Published private(set) var errorMessage: String = ""
-    
     // MARK: - Privates
     private var userHasAnsweredTheCurrentRound = false
     private var subscriptions: Set<AnyCancellable> = []
     private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     private var gameRoundDataManager: RoundDataManager?
+    
+    // Game configurations
+    private let numberOfWordsInRound: Int
+    private let numberOfWrongAttemps: Int
+    private let timeOfEachRound: Int
     
     private func privateInit() {
         $rightAnswers
@@ -37,7 +27,7 @@ class WordGameViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .map { rAns, wAns in
                 let totalAns = rAns + wAns
-                return (totalAns >= Constants.kNumberOfWordsInRound) || (wAns >= Constants.kNumberOfWrongAttemps)
+                return (totalAns >= self.numberOfWordsInRound) || (wAns >= self.numberOfWrongAttemps)
             }.assign(to: &$isGameFinished)
         
         $remainingTimeInRound
@@ -68,15 +58,21 @@ class WordGameViewModel: ObservableObject {
     private func startNewRound() {
         guard !isGameFinished else { return }
         self.currentRoundData = self.gameRoundDataManager?.generateWord()
-        self.remainingTimeInRound = Constants.kTimeOfEachRound
+        self.remainingTimeInRound = self.timeOfEachRound
         self.userHasAnsweredTheCurrentRound = false
     }
     
     // MARK: - Initializers
     
     init() {
+        let config = GameConfiguration()
+        
+        self.numberOfWordsInRound = config.numberOfWordsInRound
+        self.numberOfWrongAttemps = config.numberOfWrongAttemps
+        self.timeOfEachRound = config.timeOfEachRound
+        
         do {
-            self.gameRoundDataManager = try RoundDataManager(service: WordListManager(), probabilityOfCorrectWord: Constants.kProbabilityOfCorrectWord)
+            self.gameRoundDataManager = try RoundDataManager(service: WordListManager(), probabilityOfCorrectWord: config.probabilityOfCorrectWord)
         } catch {
             self.showError = true
             self.errorMessage = error.localizedDescription
@@ -84,9 +80,14 @@ class WordGameViewModel: ObservableObject {
         self.privateInit()
     }
     
-    init(wordService: WordService) {
+    init(wordService: WordService, config: GameConfigurationService) {
+        
+        self.numberOfWordsInRound = config.numberOfWordsInRound
+        self.numberOfWrongAttemps = config.numberOfWrongAttemps
+        self.timeOfEachRound = config.timeOfEachRound
+        
         do {
-            self.gameRoundDataManager = try RoundDataManager(service: wordService, probabilityOfCorrectWord: Constants.kProbabilityOfCorrectWord)
+            self.gameRoundDataManager = try RoundDataManager(service: wordService, probabilityOfCorrectWord: config.probabilityOfCorrectWord)
         } catch {
             self.showError = true
             self.errorMessage = error.localizedDescription
@@ -100,6 +101,17 @@ class WordGameViewModel: ObservableObject {
     }
     
     // MARK: - Publics
+    @Published private(set) var rightAnswers: Int = 0
+    @Published private(set) var wrongAnswers: Int = 0
+    
+    @Published private(set) var currentRoundData: GameRoundData?
+    
+    @Published private(set) var isGameFinished: Bool = true
+    @Published private(set) var remainingTimeInRound: Int = Int.max // Non-zero default value
+    
+    // Error
+    @Published private(set) var showError: Bool = false
+    @Published private(set) var errorMessage: String = ""
     
     public func submitAnswer(isCorrect: Bool) {
         guard !isGameFinished else { return }
@@ -118,6 +130,7 @@ class WordGameViewModel: ObservableObject {
     public func restartGame() {
         self.rightAnswers = 0
         self.wrongAnswers = 0
+        self.remainingTimeInRound = self.timeOfEachRound
         self.isGameFinished = false
         
         self.startNewRound()
