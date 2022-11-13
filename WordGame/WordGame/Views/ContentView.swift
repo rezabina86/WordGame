@@ -16,6 +16,9 @@ struct ContentView: View {
             resultView()
         } else {
             gameView()
+                .onAppear {
+                    viewModel.restartGame()
+                }
         }
     }
     
@@ -63,7 +66,6 @@ struct ContentView: View {
             
             Text("Correct attempts: \(viewModel.rightAnswers)")
             Text("Wrong attempts: \(viewModel.wrongAnswers)")
-            Text("No answers: \(viewModel.noAnswers)")
             
             Spacer()
                 .frame(height: 24)
@@ -75,8 +77,8 @@ struct ContentView: View {
                  .tint(.green)
                 
                 
-                Button("Quit") {
-                    //self.viewModel.submitAnswer(isCorrect: false)
+                Button("Quit game") {
+                    exit(0)
                 }.buttonStyle(.borderedProminent)
                  .tint(.red)
             }
