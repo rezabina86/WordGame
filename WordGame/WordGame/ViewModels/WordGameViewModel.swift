@@ -10,10 +10,14 @@ import Combine
 
 class WordGameViewModel: ObservableObject {
     
+    private static let totalOffsetChange: CGFloat = 0.8
+    private static let animationInterval: TimeInterval = 0.0001
+    
     // MARK: - Privates
     private var userHasAnsweredTheCurrentRound = false
     private var subscriptions: Set<AnyCancellable> = []
     private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    private let animationTimer = Timer.publish(every: WordGameViewModel.animationInterval, on: .main, in: .common).autoconnect()
     private var gameRoundDataManager: RoundDataManager?
     
     // Game configurations
@@ -53,11 +57,20 @@ class WordGameViewModel: ObservableObject {
                 self.remainingTimeInRound -= 1
             }
             .store(in: &subscriptions)
+        
+        animationTimer
+            .sink { _ in
+                guard !self.isGameFinished else { return }
+                
+                self.yOffset += (CGFloat(WordGameViewModel.totalOffsetChange / Double(self.timeOfEachRound)) * WordGameViewModel.animationInterval)
+            }
+            .store(in: &subscriptions)
     }
     
     private func startNewRound() {
         guard !isGameFinished else { return }
         self.currentRoundData = self.gameRoundDataManager?.generateWord()
+        self.yOffset = -(WordGameViewModel.totalOffsetChange / 2)
         self.remainingTimeInRound = self.timeOfEachRound
         self.userHasAnsweredTheCurrentRound = false
     }
@@ -112,6 +125,9 @@ class WordGameViewModel: ObservableObject {
     // Error
     @Published private(set) var showError: Bool = false
     @Published private(set) var errorMessage: String = ""
+    
+    // Animation: From top to bottom
+    @Published private(set) var yOffset: CGFloat = -(WordGameViewModel.totalOffsetChange / 2)
     
     public func submitAnswer(isCorrect: Bool) {
         guard !isGameFinished else { return }

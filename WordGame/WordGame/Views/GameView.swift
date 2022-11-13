@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GameView.swift
 //  WordGame
 //
 //  Created by Reza Bina on 11/11/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
     
     @StateObject private var viewModel = WordGameViewModel()
     
@@ -24,34 +24,42 @@ struct ContentView: View {
     
     @ViewBuilder
     func gameView() -> some View {
-        VStack {
-            HStack {
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("Correct attempts: \(viewModel.rightAnswers)")
-                    Text("Wrong attempts: \(viewModel.wrongAnswers)")
+        GeometryReader { proxy in
+            VStack {
+                HStack {
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        Text("Correct attempts: \(viewModel.rightAnswers)")
+                        Text("Wrong attempts: \(viewModel.wrongAnswers)")
+                    }
                 }
-            }
-            
-            Spacer()
-            Text(viewModel.currentRoundData?.spanish ?? "")
-            Text(viewModel.currentRoundData?.english ?? "")
-            
-            Spacer()
-            
-            HStack {
-                Button("Correct") {
-                    self.viewModel.submitAnswer(isCorrect: true)
-                }.buttonStyle(.borderedProminent)
-                 .tint(.green)
                 
+                Spacer()
+                Text(viewModel.currentRoundData?.spanish ?? "")
+                    .font(.largeTitle)
+                    .offset(y: viewModel.yOffset * proxy.size.height)
+                    .animation(.default, value: self.viewModel.currentRoundData?.spanish)
                 
-                Button("Wrong") {
-                    self.viewModel.submitAnswer(isCorrect: false)
-                }.buttonStyle(.borderedProminent)
-                 .tint(.red)
-            }
-        }.padding()
+                Text(viewModel.currentRoundData?.english ?? "")
+                    .font(.title)
+                    .animation(.default, value: self.viewModel.currentRoundData?.english)
+                
+                Spacer()
+                
+                HStack {
+                    Button("Correct") {
+                        self.viewModel.submitAnswer(isCorrect: true)
+                    }.buttonStyle(.borderedProminent)
+                     .tint(.green)
+                    
+                    
+                    Button("Wrong") {
+                        self.viewModel.submitAnswer(isCorrect: false)
+                    }.buttonStyle(.borderedProminent)
+                     .tint(.red)
+                }
+            }.padding()
+        }
     }
     
     @ViewBuilder
@@ -91,6 +99,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        GameView()
     }
 }
