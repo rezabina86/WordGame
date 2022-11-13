@@ -29,8 +29,8 @@ struct GameView: View {
                 HStack {
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Text("Correct attempts: \(viewModel.rightAnswers)")
-                        Text("Wrong attempts: \(viewModel.wrongAnswers)")
+                        Text("\(String(localized: "gameView.correctAttempts")): \(viewModel.rightAnswers)")
+                        Text("\(String(localized: "gameView.wrongAttempts")): \(viewModel.wrongAnswers)")
                     }
                 }
                 
@@ -47,13 +47,13 @@ struct GameView: View {
                 Spacer()
                 
                 HStack {
-                    Button("Correct") {
+                    Button(String(localized: "gameView.correct")) {
                         self.viewModel.submitAnswer(isCorrect: true)
                     }.buttonStyle(.borderedProminent)
                      .tint(.green)
                     
                     
-                    Button("Wrong") {
+                    Button(String(localized: "gameView.wrong")) {
                         self.viewModel.submitAnswer(isCorrect: false)
                     }.buttonStyle(.borderedProminent)
                      .tint(.red)
@@ -66,26 +66,26 @@ struct GameView: View {
     func resultView() -> some View {
         VStack(alignment: .center) {
             Spacer()
-            Text("Game Over")
+            Text(String(localized: "gameView.gameOver"))
                 .font(.headline)
             
             Spacer()
                 .frame(height: 24)
             
-            Text("Correct attempts: \(viewModel.rightAnswers)")
-            Text("Wrong attempts: \(viewModel.wrongAnswers)")
+            Text("\(String(localized: "gameView.correctAttempts")): \(viewModel.rightAnswers)")
+            Text("\(String(localized: "gameView.wrongAttempts")): \(viewModel.wrongAnswers)")
             
             Spacer()
                 .frame(height: 24)
             
             HStack {
-                Button("Play again") {
+                Button(String(localized: "gameView.playAgain")) {
                     self.viewModel.restartGame()
                 }.buttonStyle(.borderedProminent)
                  .tint(.green)
                 
                 
-                Button("Quit game") {
+                Button(String(localized: "gameView.quitGame")) {
                     exit(0)
                 }.buttonStyle(.borderedProminent)
                  .tint(.red)

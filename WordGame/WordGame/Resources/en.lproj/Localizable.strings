@@ -12,3 +12,11 @@
 "error.notEnoughWords" = "Not enough words. The list should have at least two words.";
 
 
+// Game view
+"gameView.correct" = "Correct";
+"gameView.wrong" = "Wrong";
+"gameView.playAgain" = "Play again";
+"gameView.quitGame" = "Quit game";
+"gameView.gameOver" = "Game Over";
+"gameView.correctAttempts" = "Correct attempts";
+"gameView.wrongAttempts" = "Wrong attempts";
